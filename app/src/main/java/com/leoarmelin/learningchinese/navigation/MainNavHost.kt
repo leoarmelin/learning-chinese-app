@@ -1,5 +1,6 @@
 package com.leoarmelin.learningchinese.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.leoarmelin.learningchinese.models.navigation.MainNavRoutes
+import com.leoarmelin.learningchinese.ui.ThemeColors
 import com.leoarmelin.learningchinese.ui.screens.HomeScreen
 import com.leoarmelin.learningchinese.ui.screens.MatchScreen
 import com.leoarmelin.learningchinese.viewmodels.NavigationViewModel
@@ -20,7 +22,7 @@ fun MainNavHost(
 ) {
     val navController = rememberNavController()
 
-    Box(modifier = modifier) {
+    Box(modifier = modifier.background(ThemeColors.Background)) {
         NavHost(navController = navController, startDestination = MainNavRoutes.Home.routeName) {
             composable(MainNavRoutes.Home.routeName) {
                 HomeScreen(navigationViewModel, strokeViewModel)

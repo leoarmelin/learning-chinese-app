@@ -1,6 +1,7 @@
 package com.leoarmelin.learningchinese.ui.screens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalContext
 import com.leoarmelin.learningchinese.models.navigation.MainNavRoutes
 import com.leoarmelin.learningchinese.models.strokes.Stroke
@@ -28,7 +29,6 @@ fun MatchScreen(navigationViewModel: NavigationViewModel, strokeViewModel: Strok
 
     if (strokeViewModel.matchCompletedStrokeList.size == strokeViewModel.matchCharacterStrokeList.size) {
         navigationViewModel.setRoute(MainNavRoutes.Home.routeName)
-        strokeViewModel.clearMatchStates()
     }
 
     StrokeCardList(
@@ -40,4 +40,10 @@ fun MatchScreen(navigationViewModel: NavigationViewModel, strokeViewModel: Strok
         selectedCharacter = strokeViewModel.matchSelectedCharacter,
         selectedPinyin = strokeViewModel.matchSelectedPinyin
     )
+
+    DisposableEffect(Unit) {
+        onDispose {
+            strokeViewModel.clearMatchStates()
+        }
+    }
 }

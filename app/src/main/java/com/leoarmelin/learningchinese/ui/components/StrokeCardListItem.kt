@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leoarmelin.learningchinese.models.strokes.Stroke
 import com.leoarmelin.learningchinese.models.strokes.StrokeInfoType
+import com.leoarmelin.learningchinese.ui.ThemeColors
 
 @Composable
 fun StrokeCardListItem(
@@ -32,16 +33,16 @@ fun StrokeCardListItem(
     val colorState = animateColorAsState(
         when {
             isCompleted -> Color.Transparent
-            isSelected -> Color.White
-            else -> Color.Black
+            isSelected -> ThemeColors.Background
+            else -> ThemeColors.Foreground
         },
         animationSpec = tween(delayDuration)
     )
     val backgroundColorState = animateColorAsState(
         when {
             isCompleted -> Color.Transparent
-            isSelected -> Color.Black
-            else -> Color.White
+            isSelected -> ThemeColors.Foreground
+            else -> ThemeColors.Background
         },
         animationSpec = tween(delayDuration)
     )

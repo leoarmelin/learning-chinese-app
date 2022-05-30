@@ -1,36 +1,41 @@
 package com.leoarmelin.learningchinese.ui.components
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.leoarmelin.learningchinese.models.strokes.Stroke
+import com.leoarmelin.learningchinese.ui.ThemeColors
 
 @Composable
-fun StrokeListItem(stroke: Stroke, onItemClick: (stroke: Stroke) -> Unit) {
+fun StrokeListItem(stroke: Stroke, onItemClick: (stroke: Stroke) -> Unit, onLongPress: (stroke: Stroke) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
-            .padding(horizontal = 16.dp)
-            .clickable { onItemClick(stroke) }
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onTap = { onItemClick(stroke) },
+                    onLongPress = { onLongPress(stroke) }
+                )
+            }
+            .padding(16.dp)
     ) {
         Text(
             text = stroke.character,
-            color = Color.Black,
-            fontSize = 48.sp,
+            color = ThemeColors.Foreground,
+            fontSize = 32.sp,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
 
         Text(
             text = stroke.pinyin,
-            color = Color.Black,
-            fontSize = 24.sp,
+            color = ThemeColors.Foreground,
+            fontSize = 20.sp,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .padding(start = 16.dp)
